@@ -1,8 +1,5 @@
 import time
 
-from broadcasters import StringBroadcaster
-from tasks import TimeChecker
-
 
 class Runner(object):
     def __init__(self, tasks, broadcasters, timeout=60):
@@ -11,7 +8,11 @@ class Runner(object):
         self.timeout = timeout
 
     def run(self):
-        """Run a single instance of all tasks"""
+        """Run a single instance of all tasks
+
+        Returns:
+            list of strings, messages from each task
+        """
         messages = []
         for task in self.tasks:
             if task.should_run():
@@ -20,25 +21,23 @@ class Runner(object):
                     messages.append(task_message)
         return messages
 
-    def broadcast(self, message):
+    def broadcast(self, messages):
+        """Send a list of messages to all broadcasters.
+
+        Args:
+            messages: list of strings
+        """
         for broadcaster in self.broadcasters:
-            broadcaster.send(message)
+            broadcaster.send(messages)
+
+    def _tic(self):
+        """Run and broadcast the tasks once."""
+        messages = self.run()
+        if messages:
+            self.broadcast(messages)
 
     def main(self):
+        """Run and broadcast the tasks forever."""
         while True:
-            messages = self.run()
-            if messages:
-                self.broadcast(messages)
+            self._tic()
             time.sleep(self.timeout)
-
-
-def main():
-    runner = Runner(
-        tasks=(TimeChecker(),),
-        broadcasters=(StringBroadcaster(),),
-        timeout=10
-        )
-    runner.main()
-
-if __name__ == '__main__':
-    main()
