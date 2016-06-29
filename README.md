@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/ColCarroll/pete.svg?branch=master)](https://travis-ci.org/ColCarroll/pete)
+[![Coverage Status](https://coveralls.io/repos/github/ColCarroll/pete/badge.svg?branch=master)](https://coveralls.io/github/ColCarroll/pete?branch=master)
 Pete
 ====
 *He's just happy to be here*
