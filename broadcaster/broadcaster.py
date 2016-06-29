@@ -56,36 +56,61 @@ class DBBroadcaster(Broadcaster):
         connection.cursor().execute(query)
 
     def row_count(self, connection):
+        """Get the number of rows in the table.
+
+        Args:
+            connection: Database connection
+
+        Returns:
+            Integer, number of rows in the table
+        """
         query = "SELECT COUNT(*) FROM {table}".format(table=self.table)
         return self.query_single_row(connection, query)[0]
 
-    def insert_row(self, connection, row_data):
-        formatters = ",".join([self.format_mark for _ in row_data])
+    def insert_row(self, connection, row):
+        """Insert a row into the table.
+
+        Args:
+            connection: Database connection
+            row: row data
+        """
+        formatters = ",".join([self.format_mark for _ in row])
         query = "INSERT INTO {table} values ({formatters})".format(
             table=self.table, formatters=formatters)
-        connection.cursor().execute(query, row_data)
+        connection.cursor().execute(query, row)
 
     def insert_rows(self, connection, rows):
+        """Insert multiple rows into the table.
+
+        Just a wrapper around `insert_row`.
+
+        Args:
+            connection: Database connection
+            rows: iterator of row data
+        """
         for row in rows:
             self.insert_row(connection, row)
 
     def query_single_row(self, connection, query, args=None):
+        """Execute a query and return the first row.
+
+        Args:
+            connection: Database connection
+            query: sql query to execute
+            args: optional arguments to be passed to the query string
+
+        Returns:
+            single tuple of results
+        """
         if args is None:
             args = []
         cur = connection.cursor()
         cur.execute(query, args)
         return cur.fetchone()
 
-    def query_iterator(self, connection, query, args=None):
-        if args is None:
-            args = []
-        cur = connection.cursor()
-        cur.execute(query, args)
-        for row in cur:
-            yield row
-
 
 class SQLiteBroadcaster(DBBroadcaster):
+    """Parent class for SQLite broadcasters"""
     host = None
     user = None
     password = None
@@ -98,4 +123,5 @@ class SQLiteBroadcaster(DBBroadcaster):
         super().__init__(*args, **kwargs)
 
     def get_connection(self):
+        """Get configured sqlite connection"""
         return sqlite3.connect(self.database)

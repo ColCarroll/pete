@@ -90,8 +90,7 @@ class TestDBBroadcaster(unittest.TestCase):
         # These tests are particular to the sample broadcaster
 
         # Make sure empty to start
-        with self.broadcaster.get_connection() as connection:
-            self.assertEqual(self.broadcaster.row_count(connection), 0)
+        self.assertEqual(self.broadcaster.get_messages_sent(), 0)
 
         message_stream = [
             ["message {} of {}".format(message_number, message_group)
