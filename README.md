@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/ColCarroll/pete.svg?branch=master)](https://travis-ci.org/ColCarroll/pete)
 Pete
 ====
 *He's just happy to be here*
