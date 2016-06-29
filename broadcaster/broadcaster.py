@@ -10,7 +10,7 @@ class Broadcaster(metaclass=ABCMeta):
         pass
 
 
-class DBBroadcaster(Broadcaster, metaclass=abc):
+class DBBroadcaster(Broadcaster, metaclass=ABCMeta):
     columns = []
 
     @abstractproperty

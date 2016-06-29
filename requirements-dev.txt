@@ -1,0 +1,17 @@
+appnope==0.1.0
+backports.shutil-get-terminal-size==1.0.0
+decorator==4.0.10
+flake8==2.6.0
+gnureadline==6.3.3
+ipython==4.2.0
+ipython-genutils==0.1.0
+mccabe==0.5.0
+pexpect==4.1.0
+pickleshare==0.7.2
+ptyprocess==0.5.1
+py==1.4.31
+pycodestyle==2.0.0
+pyflakes==1.2.3
+pytest==2.9.2
+simplegeneric==0.8.1
+traitlets==4.2.1
