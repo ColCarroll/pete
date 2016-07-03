@@ -1,8 +1,8 @@
 import os
-import time
 import unittest
 
-from broadcaster import Broadcaster, SQLiteBroadcaster
+from broadcaster import Broadcaster
+from examples import BasicSQLiteBroadcaster
 
 
 class TestBroadcaster(unittest.TestCase):
@@ -18,47 +18,9 @@ class TestBroadcaster(unittest.TestCase):
         EmptyBroadcaster.send = lambda x: None
 
 
-class SampleSQLiteBroadcaster(SQLiteBroadcaster):
-    # TODO: use a tempfile
-    database = '__test_db.db'
-    table = 'test_table'
-    columns = [
-        ('message_group', 'INT'),
-        ('timestamp', 'FLOAT'),
-        ('message_number', 'INT'),
-        ('message', 'TEXT')
-    ]
-
-    def get_last_group_sent(self):
-        query = "SELECT MAX(message_group) FROM {table}".format(table=self.table)
-        with self.get_connection() as connection:
-            last_group = self.query_single_row(connection, query)[0]
-        if last_group is None:
-            return -1
-        else:
-            return last_group
-
-    def get_messages_sent(self):
-        with self.get_connection() as connection:
-            return self.row_count(connection)
-
-    def send(self, messages):
-        message_group = self.get_last_group_sent() + 1
-        db_messages = []
-        for message_number, message in enumerate(messages):
-            db_messages.append((
-                message_group,
-                time.time(),
-                message_number,
-                message
-            ))
-        with self.get_connection() as connection:
-            self.insert_rows(connection, db_messages)
-
-
 class TestDBBroadcaster(unittest.TestCase):
     def setUp(self):
-        self.broadcaster = SampleSQLiteBroadcaster()
+        self.broadcaster = BasicSQLiteBroadcaster()
 
     def tearDown(self):
         if os.path.exists(self.broadcaster.database):
@@ -87,7 +49,7 @@ class TestDBBroadcaster(unittest.TestCase):
             self.assertEqual(self.broadcaster.row_count(connection), len(rows))
 
     def test_send(self):
-        # These tests are particular to the sample broadcaster
+        # These tests are particular to the basic sqlite broadcaster
 
         # Make sure empty to start
         self.assertEqual(self.broadcaster.get_messages_sent(), 0)
@@ -100,7 +62,7 @@ class TestDBBroadcaster(unittest.TestCase):
         messages_sent = 0
         for message_group, messages in enumerate(message_stream):
             # Confirm data persists between different broadcasters
-            broadcaster = SampleSQLiteBroadcaster()
+            broadcaster = BasicSQLiteBroadcaster()
             broadcaster.send(messages)
             messages_sent += len(messages)
             self.assertEqual(broadcaster.get_last_group_sent(), message_group)
