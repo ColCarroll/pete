@@ -1,1 +1,2 @@
-from .broadcaster import Broadcaster, DBBroadcaster, SQLiteBroadcaster  # noqa
+from .broadcaster import Broadcaster  # noqa
+from .db import DBBroadcaster, SQLiteBroadcaster  # noqa
