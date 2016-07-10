@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from task import Task
+from pete.task import Task
 
 
 class TimeChecker(Task):

@@ -1,6 +1,6 @@
 import unittest
 
-from task import Task
+from pete.task import Task
 from test_utils import NamedTask
 
 

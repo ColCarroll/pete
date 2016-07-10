@@ -1,5 +1,5 @@
-from examples import StringBroadcaster, TimeChecker
-from runner import Runner
+from . import StringBroadcaster, TimeChecker
+from pete.runner import Runner
 
 
 def time_to_string_runner():

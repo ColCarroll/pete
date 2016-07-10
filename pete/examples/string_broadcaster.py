@@ -1,4 +1,4 @@
-from broadcaster import Broadcaster
+from pete.broadcaster import Broadcaster
 
 
 class StringBroadcaster(Broadcaster):

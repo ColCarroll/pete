@@ -1,5 +1,5 @@
-from broadcaster import Broadcaster
-from task import Task
+from pete.broadcaster import Broadcaster
+from pete.task import Task
 
 
 class GatheringBroadcaster(Broadcaster):

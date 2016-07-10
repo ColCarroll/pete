@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import patch
 
-from examples import time_to_string_runner
+from pete.examples import time_to_string_runner
 
 
 class MockPrint(object):
