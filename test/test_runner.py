@@ -1,6 +1,6 @@
 import unittest
 
-from runner import Runner
+from pete.runner import Runner
 from test_utils import NamedTask, GatheringBroadcaster
 
 

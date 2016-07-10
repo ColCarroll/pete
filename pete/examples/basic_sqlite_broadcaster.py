@@ -1,6 +1,6 @@
 import time
 
-from broadcaster import SQLiteBroadcaster
+from pete.broadcaster import SQLiteBroadcaster
 
 
 class BasicSQLiteBroadcaster(SQLiteBroadcaster):

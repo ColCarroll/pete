@@ -1,8 +1,8 @@
 import os
 import unittest
 
-from broadcaster import Broadcaster
-from examples import BasicSQLiteBroadcaster
+from pete.broadcaster import Broadcaster
+from pete.examples import BasicSQLiteBroadcaster
 
 
 class TestBroadcaster(unittest.TestCase):
