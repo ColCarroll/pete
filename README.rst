@@ -1,5 +1,12 @@
-|Build Status| |Coverage Status| Pete ==== *He's just happy to be here*
-----------------------------
+|Build Status| |Coverage Status| 
+
+====
+Pete
+====
+
+
+*He's just happy to be here*
+
 
 Very much a work in progress. A task runner that will check on things,
 and report things. Spiritually similar to
@@ -10,9 +17,8 @@ Example
 
 ::
 
-    >>> from runner import Runner
-    >>> from broadcasters import StringBroadcaster
-    >>> from tasks import TimeChecker
+    >>> from pete.runner import Runner
+    >>> from pete.examples import StringBroadcaster, TimeChecker
     >>> 
     >>> runner = Runner(
     ...     tasks=[TimeChecker()],
