@@ -47,5 +47,4 @@ Plans
 
 .. |Build Status| image:: https://travis-ci.org/ColCarroll/pete.svg?branch=master
    :target: https://travis-ci.org/ColCarroll/pete
-.. |Coverage Status| image:: https://coveralls.io/repos/github/ColCarroll/pete/badge.svg?branch=master
-   :target: https://coveralls.io/github/ColCarroll/pete?branch=master
+.. |Coverage Status| image:: https://coveralls.io/repos/github/ColCarroll/pete/badge.svg?branch=master :target: https://coveralls.io/github/ColCarroll/pete?branch=master
