@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 here = path.abspath(path.dirname(__file__))
 
 # Get the long description from the README file
-with open(path.join(here, 'README.md'), encoding='utf-8') as buff:
+with open(path.join(here, 'README.rst'), encoding='utf-8') as buff:
     long_description = buff.read()
 
 
@@ -31,7 +31,7 @@ setup(
     install_requires=[],
     extras_require={
         'dev': ['ipython', 'flake8'],
-        'test': ['pytest', 'coverage', 'pytest-cov']
+        'test': ['pytest', 'pytest-cov']
     },
     include_package_data=True,
 )
