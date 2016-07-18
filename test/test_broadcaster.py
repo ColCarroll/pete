@@ -1,8 +1,12 @@
 import os
 import unittest
 
-from pete.broadcaster import Broadcaster
-from pete.examples import BasicSQLiteBroadcaster
+from pete import Broadcaster, BasicSQLiteBroadcaster
+
+
+class UsableSQLiteBroadcaster(BasicSQLiteBroadcaster):
+    table = 'test_table'
+    database = '__test_db'
 
 
 class TestBroadcaster(unittest.TestCase):
@@ -20,7 +24,7 @@ class TestBroadcaster(unittest.TestCase):
 
 class TestDBBroadcaster(unittest.TestCase):
     def setUp(self):
-        self.broadcaster = BasicSQLiteBroadcaster()
+        self.broadcaster = UsableSQLiteBroadcaster()
 
     def tearDown(self):
         if os.path.exists(self.broadcaster.database):
@@ -62,7 +66,7 @@ class TestDBBroadcaster(unittest.TestCase):
         messages_sent = 0
         for message_group, messages in enumerate(message_stream):
             # Confirm data persists between different broadcasters
-            broadcaster = BasicSQLiteBroadcaster()
+            broadcaster = UsableSQLiteBroadcaster()
             broadcaster.send(messages)
             messages_sent += len(messages)
             self.assertEqual(broadcaster.get_last_group_sent(), message_group)

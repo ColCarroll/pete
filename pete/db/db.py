@@ -1,11 +1,7 @@
 from abc import abstractproperty
-import os
-import sqlite3
-
-from .broadcaster import Broadcaster
 
 
-class DBBroadcaster(Broadcaster):
+class DBMixin(object):
     @abstractproperty
     def host(self):
         return None
@@ -100,22 +96,3 @@ class DBBroadcaster(Broadcaster):
         cur = connection.cursor()
         cur.execute(query, args)
         return cur.fetchone()
-
-
-class SQLiteBroadcaster(DBBroadcaster):
-    """Parent class for SQLite broadcasters"""
-    host = None
-    user = None
-    password = None
-    format_mark = "?"
-
-    def __init__(self, *args, **kwargs):
-        if not os.path.exists(self.database):
-            with self.get_connection() as connection:
-                self.create_table(connection)
-        super().__init__(*args, **kwargs)
-
-    def get_connection(self):
-        """Get configured sqlite connection"""
-        return sqlite3.connect(self.database)
-
