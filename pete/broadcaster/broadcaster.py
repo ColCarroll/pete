@@ -52,7 +52,7 @@ class BasicSQLiteBroadcaster(SQLiteBroadcaster):
     def get_last_group_sent(self):
         query = "SELECT MAX(message_group) FROM {table}".format(table=self.table)
         with self.get_connection() as connection:
-            last_group = self.query_single_row(connection, query)[0]
+            last_group, = self.query_single_row(connection, query)
         if last_group is None:
             return -1
         else:

@@ -1,1 +1,1 @@
-from .task import Task  # noqa
+from .task import Task, SQLiteTask, BasicSQLiteTask  # noqa
