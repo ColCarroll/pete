@@ -8,6 +8,7 @@ from test_utils import NamedTask
 class UsableSQLiteTask(BasicSQLiteTask):
     table = 'test_task_table'
     database = '__test_db'
+    name = 'usable sqlite task'
 
     def __init__(self, message):
         super().__init__()
@@ -42,7 +43,7 @@ class TestTask(unittest.TestCase):
 
     def test_example_class(self):
         # Just confirming no TypeErrors
-        NamedTask('')
+        NamedTask()
 
 
 class TestSQLiteTask(unittest.TestCase):

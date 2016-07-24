@@ -12,6 +12,11 @@ class Broadcaster(object, metaclass=ABCMeta):
     def __init__(self):
         pass
 
+    @abstractproperty
+    def name(self):
+        """Name for the broadcaster"""
+        return None
+        
     @abstractmethod
     def send(self, messages):
         pass

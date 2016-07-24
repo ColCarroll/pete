@@ -4,6 +4,8 @@ from pete.task import Task
 
 
 class TimeChecker(Task):
+    name = 'time checker task'
+    
     def should_run(self):
         return True
 

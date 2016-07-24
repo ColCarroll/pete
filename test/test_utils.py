@@ -2,6 +2,8 @@ from pete import Broadcaster, Task
 
 
 class GatheringBroadcaster(Broadcaster):
+    name = 'gathering broadcaster'
+    
     def __init__(self):
         self.messages = []
 
@@ -10,8 +12,9 @@ class GatheringBroadcaster(Broadcaster):
 
 
 class NamedTask(Task):
-    def __init__(self, name):
-        self.name = name
+    name = 'named task'
+
+    def __init__(self):
         self.will_run = True
         self.run_count = 0
 

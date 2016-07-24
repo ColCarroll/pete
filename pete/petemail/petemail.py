@@ -59,14 +59,12 @@ class EmailMixin(object):
         from_email = config['from']
         to_emails = config['to']
 
-        message = json.loads(message_json)
-
         msg = MIMEMultipart('alternative')
-        msg['Subject'] = self.subject_formatter.format(**message)
+        msg['Subject'] = self.subject_formatter.format(**message_dict)
         msg['From'] = from_email
         msg['To'] = ",".join(to_emails)
 
-        msg.attach(MIMEText(self.message_formatter.format(**message), 'plain'))
+        msg.attach(MIMEText(self.message_formatter.format(**message_dict), 'plain'))
 
         server = smtplib.SMTP(config['smtp'])
         server.ehlo()

@@ -5,6 +5,7 @@ from pete import Broadcaster, BasicSQLiteBroadcaster
 
 
 class UsableSQLiteBroadcaster(BasicSQLiteBroadcaster):
+    name = 'usable sqlite broadcaster'
     table = 'test_table'
     database = '__test_db'
 

@@ -6,8 +6,8 @@ from test_utils import NamedTask, GatheringBroadcaster
 
 class TestRunner(unittest.TestCase):
     def setUp(self):
-        self.run_task = NamedTask('Does run')
-        self.no_run_task = NamedTask('Does not run')
+        self.run_task = NamedTask()
+        self.no_run_task = NamedTask()
         self.no_run_task.will_run = False
         self.broadcasters = [GatheringBroadcaster() for _ in range(3)]
         self.runner = Runner(

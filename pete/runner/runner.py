@@ -1,5 +1,7 @@
 import time
 
+from .._helpers import _log
+
 
 class Runner(object):
     def __init__(self, tasks, broadcasters, timeout=60):
@@ -16,7 +18,10 @@ class Runner(object):
         messages = []
         for task in self.tasks:
             if task.should_run():
+                _log('info', 'Running {0.name}'.format(task))
                 messages += task.run()
+            else:
+                _log('info', 'Not running {0.name}'.format(task))
         return messages
 
     def broadcast(self, messages):
@@ -25,8 +30,11 @@ class Runner(object):
         Args:
             messages: list of strings
         """
-        for broadcaster in self.broadcasters:
-            broadcaster.send(messages)
+        if messages:
+            for broadcaster in self.broadcasters:
+                _log('info', 'Sending {0:,d} messages to {1.name}'.format(
+                    len(messages), broadcaster))
+                broadcaster.send(messages)
 
     def _tic(self):
         """Run and broadcast the tasks once."""

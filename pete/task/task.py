@@ -7,6 +7,12 @@ from .. import db
 
 
 class Task(metaclass=ABCMeta):
+
+    @abstractproperty
+    def name(self):
+        """Name for the task"""
+        pass
+        
     @abstractmethod
     def should_run(self):
         """Check whether the function should run.  Should be fast."""
