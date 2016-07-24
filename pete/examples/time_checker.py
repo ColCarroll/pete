@@ -8,4 +8,4 @@ class TimeChecker(Task):
         return True
 
     def run(self):
-        return "It is now {}".format(datetime.now().strftime("%H:%M:%S"))
+        return ["It is now {}".format(datetime.now().strftime("%H:%M:%S"))]

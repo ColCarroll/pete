@@ -1,9 +1,11 @@
 from abc import ABCMeta, abstractmethod, abstractproperty
+import json
 import os
 import sqlite3
 import time
 
 from .. import db
+from .. import petemail
 
 
 class Broadcaster(object, metaclass=ABCMeta):
@@ -74,3 +76,14 @@ class BasicSQLiteBroadcaster(SQLiteBroadcaster):
             ))
         with self.get_connection() as connection:
             self.insert_rows(connection, db_messages)
+
+
+class EmailBroadcaster(petemail.EmailMixin, Broadcaster):
+    def send(self, messages):
+        for message in messages:
+            try:
+                message_dict = json.loads(message)
+            except ValueError:
+                continue
+            else:
+                self.send_message(message_dict)

@@ -11,7 +11,7 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as buff:
 
 setup(
     name='pete',
-    version='0.0.1',
+    version='0.1.0',
     description='A simple taskrunner',
     long_description=long_description,
     author='Colin Carroll',

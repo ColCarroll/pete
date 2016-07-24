@@ -16,9 +16,7 @@ class Runner(object):
         messages = []
         for task in self.tasks:
             if task.should_run():
-                task_message = task.run()
-                if task_message:
-                    messages.append(task_message)
+                messages += task.run()
         return messages
 
     def broadcast(self, messages):

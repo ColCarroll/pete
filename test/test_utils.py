@@ -20,4 +20,4 @@ class NamedTask(Task):
 
     def run(self):
         self.run_count += 1
-        return "{0.name} {0.run_count}".format(self)
+        return ["{0.name} {0.run_count}".format(self)]

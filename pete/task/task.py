@@ -14,7 +14,7 @@ class Task(metaclass=ABCMeta):
 
     @abstractmethod
     def run(self):
-        """Run the task and return a string."""
+        """Run the task and return a list of strings."""
         pass
 
 

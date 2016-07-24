@@ -13,7 +13,6 @@ class MockPrint(object):
 
 
 class TestExamples(unittest.TestCase):
-
     def test_example_runner(self):
         runner = time_to_string_runner()
         # Capture print, make sure
