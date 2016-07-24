@@ -1,9 +1,12 @@
+import os
 from pete import Broadcaster, Task
+
+TEST_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
 class GatheringBroadcaster(Broadcaster):
     name = 'gathering broadcaster'
-    
+
     def __init__(self):
         self.messages = []
 

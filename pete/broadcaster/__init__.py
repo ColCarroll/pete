@@ -1,1 +1,1 @@
-from .broadcaster import Broadcaster, SQLiteBroadcaster, BasicSQLiteBroadcaster, EmailBroadcaster  # noqa
+from .broadcaster import Broadcaster, SQLiteBroadcaster, BasicSQLiteBroadcaster, BasicEmailBroadcaster  # noqa

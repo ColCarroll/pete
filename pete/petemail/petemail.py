@@ -5,15 +5,11 @@ import json
 import smtplib
 
 
-def sample_config():
-
-    return json.dumps()
-
-
 class EmailMixin(object):
     """
     Helps sending emails.  Requires a config file json file that looks something like this:
-    {
+    """
+    sample_config = {
         "username": "myuser@gmail.com",
         "from": "myuser@gmail.com",
         "password": "mypassword",
@@ -23,8 +19,6 @@ class EmailMixin(object):
             "youruser@gmail.com"
         ]
     }
-    """
-    required_keys = ('from', 'to', 'smtp', 'username', 'password')
 
     @abstractproperty
     def email_config_filename(self):
@@ -41,9 +35,10 @@ class EmailMixin(object):
     def _get_config(self):
         with open(self.email_config_filename, 'r') as buff:
             config = json.load(buff)
-        for required_key in EmailMixin.required_keys:
+        for required_key in EmailMixin.sample_config:
             if required_key not in config:
-                raise KeyError('Config must include {}'.format(required_key))
+                raise KeyError('Config missing {}'.format(required_key))
+        return config
 
     def send_message(self, message_dict):
         """Email a message given a dictionary.
@@ -53,7 +48,7 @@ class EmailMixin(object):
         EmailMixin.email_config_filename.
 
         Args:
-            message_json: A json string defining a message.
+            message_dict: A json string defining a message.
         """
         config = self._get_config()
         from_email = config['from']

@@ -16,7 +16,7 @@ class Broadcaster(object, metaclass=ABCMeta):
     def name(self):
         """Name for the broadcaster"""
         return None
-        
+
     @abstractmethod
     def send(self, messages):
         pass
@@ -83,12 +83,8 @@ class BasicSQLiteBroadcaster(SQLiteBroadcaster):
             self.insert_rows(connection, db_messages)
 
 
-class EmailBroadcaster(petemail.EmailMixin, Broadcaster):
+class BasicEmailBroadcaster(petemail.EmailMixin, Broadcaster):
     def send(self, messages):
         for message in messages:
-            try:
-                message_dict = json.loads(message)
-            except ValueError:
-                continue
-            else:
-                self.send_message(message_dict)
+            message_dict = json.loads(message)
+            self.send_message(message_dict)

@@ -1,0 +1,10 @@
+{
+        "username": "myuser@gmail.com",
+        "from": "myuser@gmail.com",
+        "password": "mypassword",
+        "smtp": "localhost",
+        "to": [
+            "myuser@gmail.com",
+            "youruser@gmail.com"
+        ]
+    }

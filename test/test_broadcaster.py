@@ -1,13 +1,44 @@
+import json
 import os
 import unittest
+from unittest.mock import MagicMock
 
-from pete import Broadcaster, BasicSQLiteBroadcaster
+from pete import Broadcaster, BasicSQLiteBroadcaster, BasicEmailBroadcaster
+from test_utils import TEST_DIR
 
 
 class UsableSQLiteBroadcaster(BasicSQLiteBroadcaster):
     name = 'usable sqlite broadcaster'
     table = 'test_table'
     database = '__test_db'
+
+
+class UsableEmailBroadcaster(BasicEmailBroadcaster):
+    name = 'usable email broadcaster'
+    email_config_filename = os.path.join(TEST_DIR, 'test_email_config.json')
+    subject_formatter = '{subject}'
+    message_formatter = '{message}'
+
+
+def get_mock_smtp_server(host):
+    mock_server = MagicMock()
+    mock_server.host = host
+    return mock_server
+
+
+class TestEmailBroadcaster(unittest.TestCase):
+    def setUp(self):
+        self.broadcaster = UsableEmailBroadcaster()
+        self.expected_config = json.load(open(UsableEmailBroadcaster.email_config_filename))
+
+    def test_get_config(self):
+        config = self.broadcaster._get_config()
+        self.assertDictEqual(config, self.expected_config)
+
+    def test_send_message(self):
+        # TODO: remove this patch
+        with unittest.mock.patch('smtplib.SMTP', autospec=True):
+            self.broadcaster.send_message({"subject": "test", "message": "test"})
 
 
 class TestBroadcaster(unittest.TestCase):
